@@ -100,9 +100,9 @@ Patents to keep clear of, with the reasons, are in `docs/design.md` and
 
 ## Other open items
 
-- **Test scripts into the repos.** The functional tests used during the
-  ports (e.g. LQR's 16-bit check) are not yet committed; each plug-in
-  should get a `tests/` folder.
+- **Tests in the repos** (done 2026-09-26): every repo has `tests/run.sh`
+  (GIMP-Lensfun `tests/compare.sh`), which runs headless in the Flatpak
+  GIMP and checks results.
 - **Upstream pull requests.** Wavelet Denoise: upstream already has a
   pull request #6 by Arvil (8-bit only); plan is to open ours from
   `gimp3-upstream` and comment on #6. Wavelet Sharpen: open from
@@ -110,13 +110,10 @@ Patents to keep clear of, with the reasons, are in `docs/design.md` and
 - **Menu labels**: the wavelet plug-ins use the old style ("Wavelet
   sharpen ...") instead of GIMP 3 Title Case ("Wavelet Sharpen..."); both
   versions sit in Filters > Enhance. Sharpen's default amount to review.
-- **Liquid Rescale polish**:
-  - `meson.build` says `GPL-3.0-or-later`, but COPYING and the sources
-    are GPL 2 or later: fix the license string;
-  - `-DDEBUG` is always on in `meson.build`;
-  - the port dropped the help registration;
-  - `GTK_STOCK_EDIT` / `GTK_STOCK_NEW` in `src/page_advanced.c` are
-    deprecated stock icons; use icon names.
+- **Liquid Rescale polish**: the license string and `-DDEBUG` are fixed;
+  still open: the port dropped the help registration, and
+  `GTK_STOCK_EDIT` / `GTK_STOCK_NEW` in `src/page_advanced.c` are
+  deprecated stock icons.
 - **Packaging**: release tarballs, and Flatpak packages so the filters
   work on other computers with Flatpak GIMP. Postponed until the filters
   settle.
