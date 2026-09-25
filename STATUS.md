@@ -59,6 +59,18 @@ Restart GIMP afterwards. The script says how to install the GNOME SDK if it
 is missing. For testing dialogs without a screen, see `gui/cdp.mjs` in the
 README.
 
+## Overnight queue (2026-09-25, from David)
+
+In this order, each committed in its own repo as it goes:
+
+1. **BIMP** port to GIMP 3 (`gimp-plugin-bimp`, branch `gimp3`; local only
+   until the GitHub login is fixed). No one else has started one: upstream
+   is silent since 2023, `v3-dev` is older than master, no forks have
+   GIMP 3 work. Adds a non-interactive procedure that runs a saved
+   `.bimp` set on files, which also makes it testable headlessly.
+2. **Marine snow**: `underwater:marine-snow` in gegl-underwater (PLAN 4b).
+3. **Lensfun as a GEGL filter** (live preview, non-destructive).
+
 ## Next: gegl-underwater
 
 This is the one in progress. Its own `PLAN.md` has the full list; in order:
