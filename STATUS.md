@@ -31,7 +31,7 @@ All under `~/store/code/sandbranch`, pushed to github.com/sandbranch.
 | gimp-lqr-plugin | Liquid Rescale | gimp3 (default) | works; builds liblqr itself (meson subproject); polish open |
 | GIMP-Lensfun | lens correction with the Lensfun database | gimp3 (default) | rewritten for GIMP 3, works, installed |
 | gegl-underwater | original underwater color correction filter | main | skeleton, research and design done; no processing yet |
-| gegl-depth-blur | Depth Blur: blur by a depth map (successor to Focus Blur) | main | first version works (command line and GIMP); not yet on GitHub, see below |
+| gegl-depth-blur | Depth Blur: blur by a depth map (successor to Focus Blur) | main | first version works (command line and GIMP); on GitHub |
 
 The branch `gimp3-upstream` is the port without the "this is a fork" note
 in the README, ready for an upstream pull request.
@@ -63,8 +63,7 @@ README.
 
 In this order, each committed in its own repo as it goes:
 
-1. **BIMP** port to GIMP 3 (`gimp-plugin-bimp`, branch `gimp3`; local only
-   until the GitHub login is fixed). No one else has started one: upstream
+1. **BIMP** port to GIMP 3 (`gimp-plugin-bimp`, branch `gimp3`, on github.com/sandbranch/gimp-plugin-bimp). No one else has started one: upstream
    is silent since 2023, `v3-dev` is older than master, no forks have
    GIMP 3 work. Adds a non-interactive procedure that runs a saved
    `.bimp` set on files, which also makes it testable headlessly.
@@ -118,8 +117,7 @@ Patents to keep clear of, with the reasons, are in `docs/design.md` and
 - **Focus Blur** became the GEGL filter Depth Blur, `depth:blur`
   (gegl-depth-blur, 2026-09-25): no plug-in port, since its upstream
   is gone and a GEGL filter covers it. Its own `PLAN.md` has the next
-  steps; first, create the GitHub repo (`gh` needed a new login) and look
-  at the dialog in GIMP. GIMP merges filters with an aux input on OK
+  steps; first, look at the dialog in GIMP. GIMP merges filters with an aux input on OK
   (a TODO in GIMP), so it is not kept as an editable filter.
 - **Not started**: BIMP (batch processing).
 
