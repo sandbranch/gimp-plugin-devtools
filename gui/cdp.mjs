@@ -28,7 +28,9 @@ for (const a of acts) {
   }
   else if (k === 'text') {
     for (const ch of v) {
-      const code = ch.charCodeAt(0);
+      // virtual key codes are those of the upper case letter or digit: the
+      // lower case codes 112-123 are F1-F12, which would swallow p to {
+      const code = /[a-z0-9]/i.test(ch) ? ch.toUpperCase().charCodeAt(0) : 0;
       await send('Input.dispatchKeyEvent', { type: 'keyDown', key: ch, text: ch, windowsVirtualKeyCode: code, nativeVirtualKeyCode: code });
       await send('Input.dispatchKeyEvent', { type: 'keyUp', key: ch, windowsVirtualKeyCode: code, nativeVirtualKeyCode: code });
     }
