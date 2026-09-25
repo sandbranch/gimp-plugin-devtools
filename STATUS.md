@@ -30,7 +30,7 @@ All under `~/store/code/sandbranch`, pushed to github.com/sandbranch.
 | gegl-wavelet | `wavelet:sharpen` and `wavelet:denoise` as GEGL operations | main | work, same output as the plug-ins; installed and in use |
 | gimp-lqr-plugin | Liquid Rescale | gimp3 (default) | works; builds liblqr itself (meson subproject); polish open |
 | GIMP-Lensfun | lens correction with the Lensfun database | gimp3 (default) | rewritten for GIMP 3, works, installed |
-| gegl-underwater | original underwater color correction filter | main | skeleton, research and design done; no processing yet |
+| gegl-underwater | underwater filters: marine snow removal (works), color correction (skeleton) | main | marine snow done and tested; color waits on photos |
 | gimp-plugin-bimp | BIMP, batch processing | gimp3 (default) | ported; 31 batch tests pass; window tested; installed |
 | gegl-depth-blur | Depth Blur: blur by a depth map (successor to Focus Blur) | main | first version works (command line and GIMP); on GitHub |
 
@@ -68,7 +68,9 @@ In this order, each committed in its own repo as it goes:
    is silent since 2023, `v3-dev` is older than master, no forks have
    GIMP 3 work. Adds a non-interactive procedure that runs a saved
    `.bimp` set on files, which also makes it testable headlessly.
-2. **Marine snow**: `underwater:marine-snow` in gegl-underwater (PLAN 4b).
+2. **Marine snow**: `underwater:marine-snow` in gegl-underwater (PLAN 4b). Done:
+   Filters > Enhance > Remove Marine Snow..., tested on a synthetic scene
+   and in GIMP; next is real photos.
 3. **Lensfun as a GEGL filter** (live preview, non-destructive).
 
 ## Next: gegl-underwater
