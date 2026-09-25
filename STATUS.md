@@ -1,6 +1,6 @@
 # Status of the GIMP 3 plug-in work
 
-Where everything stands, and what comes next. Last updated 2026-09-25.
+Where everything stands, and what comes next. Last updated 2026-09-25 (evening).
 
 ## The plan
 
@@ -31,6 +31,7 @@ All under `~/store/code/sandbranch`, pushed to github.com/sandbranch.
 | gimp-lqr-plugin | Liquid Rescale | gimp3 (default) | works; builds liblqr itself (meson subproject); polish open |
 | GIMP-Lensfun | lens correction with the Lensfun database | gimp3 (default) | rewritten for GIMP 3, works, installed |
 | gegl-underwater | original underwater color correction filter | main | skeleton, research and design done; no processing yet |
+| gegl-depth-of-field | depth of field by a depth map (successor to Focus Blur) | main | first version works (command line and GIMP); not yet on GitHub, see below |
 
 The branch `gimp3-upstream` is the port without the "this is a fork" note
 in the README, ready for an upstream pull request.
@@ -102,7 +103,13 @@ Patents to keep clear of, with the reasons, are in `docs/design.md` and
 - **Packaging**: release tarballs, and Flatpak packages so the filters
   work on other computers with Flatpak GIMP. Postponed until the filters
   settle.
-- **Not started**: BIMP (batch processing) and Focus Blur.
+- **Focus Blur** became the GEGL filter `dof:depth-of-field`
+  (gegl-depth-of-field, 2026-09-25): no plug-in port, since its upstream
+  is gone and a GEGL filter covers it. Its own `PLAN.md` has the next
+  steps; first, create the GitHub repo (`gh` needed a new login) and look
+  at the dialog in GIMP. GIMP merges filters with an aux input on OK
+  (a TODO in GIMP), so it is not kept as an editable filter.
+- **Not started**: BIMP (batch processing).
 
 ## Things learned the hard way
 
