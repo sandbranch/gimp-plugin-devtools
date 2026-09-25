@@ -31,6 +31,7 @@ All under `~/store/code/sandbranch`, pushed to github.com/sandbranch.
 | gimp-lqr-plugin | Liquid Rescale | gimp3 (default) | works; builds liblqr itself (meson subproject); polish open |
 | GIMP-Lensfun | lens correction with the Lensfun database | gimp3 (default) | rewritten for GIMP 3, works, installed |
 | gegl-underwater | original underwater color correction filter | main | skeleton, research and design done; no processing yet |
+| gimp-plugin-bimp | BIMP, batch processing | gimp3 (default) | ported; 31 batch tests pass; window tested; installed |
 | gegl-depth-blur | Depth Blur: blur by a depth map (successor to Focus Blur) | main | first version works (command line and GIMP); on GitHub |
 
 The branch `gimp3-upstream` is the port without the "this is a fork" note
@@ -119,7 +120,12 @@ Patents to keep clear of, with the reasons, are in `docs/design.md` and
   is gone and a GEGL filter covers it. Its own `PLAN.md` has the next
   steps; first, look at the dialog in GIMP. GIMP merges filters with an aux input on OK
   (a TODO in GIMP), so it is not kept as an editable filter.
-- **Not started**: BIMP (batch processing).
+- **BIMP** (2026-09-25/26): ported to GIMP 3, with a new non-interactive
+  `plug-in-bimp-batch`. Open: a manipulation for GIMP 3's filters, which
+  are GEGL operations and not procedures, so "Other GIMP procedure..."
+  cannot list them (GimpDrawableFilter with its config would do it); the
+  Windows installer (`nsis/`); offering the port upstream (no reply from
+  the author since 2023, issue #420).
 
 ## Things learned the hard way
 
