@@ -4,6 +4,8 @@ Scripts for building and testing GIMP 3 plug-ins and GEGL operations,
 especially against the Flatpak version of GIMP, used for the plug-ins under
 [github.com/sandbranch](https://github.com/sandbranch).
 
+Where that work stands and what comes next: [STATUS.md](STATUS.md).
+
 ## gimp-build.sh
 
 Runs a build command in a source folder against the GIMP that will run the
