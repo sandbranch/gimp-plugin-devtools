@@ -110,10 +110,9 @@ Patents to keep clear of, with the reasons, are in `docs/design.md` and
 - **Menu labels**: the wavelet plug-ins use the old style ("Wavelet
   sharpen ...") instead of GIMP 3 Title Case ("Wavelet Sharpen..."); both
   versions sit in Filters > Enhance. Sharpen's default amount to review.
-- **Liquid Rescale polish**: the license string and `-DDEBUG` are fixed;
-  still open: the port dropped the help registration, and
-  `GTK_STOCK_EDIT` / `GTK_STOCK_NEW` in `src/page_advanced.c` are
-  deprecated stock icons.
+- **Liquid Rescale polish**: license string, `-DDEBUG` and all deprecated
+  GTK stock items are fixed; still open: the port dropped the help
+  registration.
 - **Packaging**: release tarballs, and Flatpak packages so the filters
   work on other computers with Flatpak GIMP. Postponed until the filters
   settle.
