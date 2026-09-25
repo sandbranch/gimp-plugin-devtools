@@ -1,6 +1,6 @@
 # Status of the GIMP 3 plug-in work
 
-Where everything stands, and what comes next. Last updated 2026-09-25 (evening).
+Where everything stands, and what comes next. Last updated 2026-09-26 (overnight).
 
 ## The plan
 
@@ -29,7 +29,7 @@ All under `~/store/code/sandbranch`, pushed to github.com/sandbranch.
 | gimp-wavelet-sharpen | Wavelet Sharpen plug-in, ported | gimp3 (default), gimp3-upstream | works; not yet offered upstream |
 | gegl-wavelet | `wavelet:sharpen` and `wavelet:denoise` as GEGL operations | main | work, same output as the plug-ins; installed and in use |
 | gimp-lqr-plugin | Liquid Rescale | gimp3 (default) | works; builds liblqr itself (meson subproject); polish open |
-| GIMP-Lensfun | lens correction with the Lensfun database | gimp3 (default) | rewritten for GIMP 3, works, installed |
+| GIMP-Lensfun | lens correction with the Lensfun database, plug-in and GEGL filter | gimp3 (default) | rewritten for GIMP 3; lensfun:correct keeps it editable; installed |
 | gegl-underwater | underwater filters: marine snow removal (works), color correction (skeleton) | main | marine snow done and tested; color waits on photos |
 | gimp-plugin-bimp | BIMP, batch processing | gimp3 (default) | ported; 31 batch tests pass; window tested; installed |
 | gegl-depth-blur | Depth Blur: blur by a depth map (successor to Focus Blur) | main | first version works (command line and GIMP); on GitHub |
@@ -71,7 +71,10 @@ In this order, each committed in its own repo as it goes:
 2. **Marine snow**: `underwater:marine-snow` in gegl-underwater (PLAN 4b). Done:
    Filters > Enhance > Remove Marine Snow..., tested on a synthetic scene
    and in GIMP; next is real photos.
-3. **Lensfun as a GEGL filter** (live preview, non-destructive).
+3. **Lensfun as a GEGL filter** (live preview, non-destructive). Done:
+   `lensfun:correct` in the GIMP-Lensfun repo (shares the correction code);
+   the plug-in adds it with the Exif settings ("Keep as an editable
+   filter"). tests/compare.sh: plug-in and filter agree.
 
 ## Next: gegl-underwater
 
