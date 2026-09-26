@@ -132,9 +132,9 @@ Next, to look at together with the user:
 1. The dialog on a real photo (`tests/gui/start.sh photo.jpg`) and the
    layout at other screen sizes; whether the result view should be on
    the right or switchable.
-2. A pass/fail GUI test from the Broadway run (paint, Size to remove the
-   red, Rescale, check tests/output/gui/result.txt): the manual steps
-   worked; `cdp.mjs` drags painted even with `button: none` on move.
+2. Done: `tests/gui/gui-test.sh` paints, sizes and rescales on Broadway
+   and checks the result (6 checks pass). The dialog now starts at the
+   layer's size instead of the last run's.
 3. Translations (po/ is set up, no languages yet; Swedish first?).
 4. Keyboard shortcuts (K, R, E, Ctrl+Z), and a keep/remove brush of
    softer edges if needed.
