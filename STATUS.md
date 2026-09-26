@@ -30,7 +30,7 @@ All under `~/store/code/sandbranch`, pushed to github.com/sandbranch.
 | gegl-wavelet | `wavelet:sharpen` and `wavelet:denoise` as GEGL operations | main | work, same output as the plug-ins; installed and in use |
 | gimp-lqr-plugin | Liquid Rescale | gimp3 (default) | works; builds liblqr itself (meson subproject); polish open |
 | GIMP-Lensfun | lens correction with the Lensfun database, plug-in and GEGL filter | gimp3 (default) | rewritten for GIMP 3; lensfun:correct keeps it editable; installed |
-| gegl-underwater | underwater filters: marine snow removal (works), color correction (skeleton) | main | marine snow done and tested; color waits on photos |
+| gegl-underwater | underwater filters: marine snow removal (works), color correction (first version works) | main | both tested; color tuned on 42 Commons photos |
 | gimp-plugin-bimp | BIMP, batch processing | gimp3 (default) | ported; 31 batch tests pass; window tested; installed |
 | gegl-depth-blur | Depth Blur: blur by a depth map (successor to Focus Blur) | main | first version works (command line and GIMP); on GitHub |
 
@@ -78,22 +78,27 @@ In this order, each committed in its own repo as it goes:
 
 ## Next: gegl-underwater
 
-This is the one in progress. Its own `PLAN.md` has the full list; in order:
+This is the one in progress. Its own `PLAN.md` has the full list.
 
-1. **Test photos (waiting on David).** Put them in `tests/images/` (not
-   committed without the photographer's permission; the README there
-   lists what helps). Also useful to know per photo: where the dive was,
-   camera and raw or JPEG, strobe or ambient light.
-2. `tests/run.sh`: before/after sheets and simple measurements per photo.
-3. Milestone 2: statistics, red restoration (Ancuti Eq. 4, verified
-   against the paper), white balance. Then milestone 3: water color,
-   backscatter, keep water color.
-4. Milestone 4b: "reduce red noise" with the wavelet denoise algorithm,
-   and a separate `underwater:marine-snow` operation. The speck detection
-   rule of Farhadifard et al. 2017 and the patent check are done and
-   written up in `docs/research.md`: the only marine snow patents
-   (US 11,710,245 and US 12,217,439) need optical flow between video
-   frames, so a single-photo filter is outside them.
+Done (2026-09-26): the color correction `underwater:correct` works in a
+first version (milestones 1 to 3). Test photos: 42 freely licensed ones
+from Wikimedia Commons, listed in `tests/images/manifest.json` and
+downloaded with `tests/images/fetch.py` (the photos are not committed).
+`tests/run.sh` writes before/after sheets and measurements;
+`tests/gimp-test.sh` checks the filter non-destructively in GIMP (same
+result as the command line). The pipeline as built, and where it
+differs from the papers, is in `docs/design.md`.
+
+Next, in order:
+
+1. The known issues in `docs/design.md`: cyan sunlit water near the
+   surface, khaki murky green water, glow around subjects, a gray shark
+   going warm; speed (about 4 s on 24 MP).
+2. Real dive photos from David, to check against the Commons set.
+3. SQUID (Berman et al.) color charts as an accuracy test.
+4. Milestone 4b: "reduce red noise" with the wavelet denoise algorithm;
+   marine snow on real photos. (The Farhadifard rule and the patent
+   check are in `docs/research.md`: the marine snow patents need video.)
 
 Patents to keep clear of, with the reasons, are in `docs/design.md` and
 `docs/research.md`. Any change to the pipeline is checked against them.
