@@ -91,9 +91,12 @@ differs from the papers, is in `docs/design.md`.
 
 Next, in order:
 
-1. The known issues in `docs/design.md`: cyan sunlit water near the
-   surface, khaki murky green water, glow around subjects, a gray shark
-   going warm; speed (about 4 s on 24 MP).
+1. The known issues in `docs/design.md`. Fixed since the first version
+   (a water color map, Oklab keep water, p = 2 white balance): green
+   sunlit water, lavender blue water, khaki murk. Left: a gray reef in
+   very green water (ambient-green-08), glow around subjects, a gray
+   shark going warm, speed (about 4 s on 24 MP). `tests/compare.py a b`
+   puts runs side by side.
 2. Real dive photos from David, to check against the Commons set.
 3. SQUID (Berman et al.) color charts as an accuracy test.
 4. Milestone 4b: "reduce red noise" with the wavelet denoise algorithm;
