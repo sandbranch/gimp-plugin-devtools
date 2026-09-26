@@ -50,6 +50,7 @@ With the Flatpak GIMP, from each repo's folder
 
     # plug-ins
     gimp-build.sh . meson setup build -Dplugindir=\$GIMP_PLUGINDIR
+    # (gimp-lqr-plugin calls the option -Dgimp_plugindir)
     gimp-build.sh . ninja -C build install
 
     # GEGL operations (gegl-wavelet, gegl-underwater)
