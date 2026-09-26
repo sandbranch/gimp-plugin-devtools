@@ -33,6 +33,7 @@ All under `~/store/code/sandbranch`, pushed to github.com/sandbranch.
 | gegl-underwater | underwater filters: marine snow removal (works), color correction (first version works) | main | both tested; color tuned on 42 Commons photos |
 | gimp-plugin-bimp | BIMP, batch processing | gimp3 (default) | ported; 31 batch tests pass; window tested; installed |
 | gegl-depth-blur | Depth Blur: blur by a depth map (successor to Focus Blur) | main | first version works (command line and GIMP); on GitHub |
+| gimp-lqr-paint | Liquid Rescale Paint: seam carving with keep (green) and remove (red) painted in its dialog, live preview | main | first version works; 38 GIMP cases + 26 unit tests pass, also under ASan; dialog tried on Broadway |
 
 The branch `gimp3-upstream` is the port without the "this is a fork" note
 in the README, ready for an upstream pull request.
@@ -106,6 +107,37 @@ Next, in order:
 
 Patents to keep clear of, with the reasons, are in `docs/design.md` and
 `docs/research.md`. Any change to the pipeline is checked against them.
+
+## Paused here (2026-09-26): gimp-lqr-paint
+
+The user's idea: a Liquid Rescale window with a small view of the image,
+green Keep and red Remove buttons to paint with, and the controls around
+it. Built as a new plug-in on liblqr (repo gimp-lqr-paint), not in the
+ported gimp-lqr-plugin. Done and pushed:
+
+- `src/carve.c` (seam carving on float buffers, masks and extra images
+  carved along, restore size, cancellable) and `src/masks.c` (painting,
+  resampling, undo), both with unit tests; liblqr built in with a patch
+  for a leak in its carver lists (report upstream).
+- The plug-in: `plug-in-lqr-paint`, Layer > Liquid Rescale Paint...; masks
+  stored as hidden layers found by a parasite, carved along; one undo
+  step; all precisions, gray, alpha, layer masks.
+- The dialog: Keep, Remove, Eraser (right button too), brush, undo,
+  clear, live result carved in a thread, Size to remove the red, Restore
+  the original size, Fine tune. First run on Broadway worked
+  (docs/dialog-remove.png, docs/result.png).
+
+Next, to look at together with the user:
+
+1. The dialog on a real photo (`tests/gui/start.sh photo.jpg`) and the
+   layout at other screen sizes; whether the result view should be on
+   the right or switchable.
+2. A pass/fail GUI test from the Broadway run (paint, Size to remove the
+   red, Rescale, check tests/output/gui/result.txt): the manual steps
+   worked; `cdp.mjs` drags painted even with `button: none` on move.
+3. Translations (po/ is set up, no languages yet; Swedish first?).
+4. Keyboard shortcuts (K, R, E, Ctrl+Z), and a keep/remove brush of
+   softer edges if needed.
 
 ## Audit (2026-09-26)
 
