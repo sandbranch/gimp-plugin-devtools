@@ -106,6 +106,13 @@ Next, in order:
 Patents to keep clear of, with the reasons, are in `docs/design.md` and
 `docs/research.md`. Any change to the pipeline is checked against them.
 
+## Candidates for later
+
+[docs/candidates.md](docs/candidates.md) (2026-09-26): a fact-checked
+sweep of abandoned GIMP 2 plug-ins that still have an unmet need in GIMP
+3, ranked, with licenses read from the sources, plus what exists for HDR
+merging, focus stacking and stitching. Nothing chosen yet.
+
 ## Other open items
 
 - **Tests in the repos** (done 2026-09-26): every repo has `tests/run.sh`
