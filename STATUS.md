@@ -107,6 +107,42 @@ Next, in order:
 Patents to keep clear of, with the reasons, are in `docs/design.md` and
 `docs/research.md`. Any change to the pipeline is checked against them.
 
+## Audit (2026-09-26)
+
+Every repo was reviewed for bugs, and each has a pass/fail test suite
+that runs with one command, without a display or network, in a
+throwaway GIMP profile (`GIMP3_DIRECTORY`), and under AddressSanitizer
+and UBSan (the Flatpak SDK has the runtimes; `flatpak run --devel`).
+
+| Repo | Real bugs fixed | Checks |
+|---|---|---|
+| gegl-wavelet | CIELAB NaN, abort on unbounded input, zero settings changed the image, abort without memory | 116 (`tests/run.sh`) |
+| gimp-wavelet-denoise | YCbCr round trip not exact, CIELAB NaN, indexed/groups/locked layers "succeeded" | 233 (`tests/run.sh`) |
+| gimp-wavelet-sharpen | YCbCr round trip, indexed/groups/locked layers | 209 (`tests/run.sh`) |
+| GIMP-Lensfun | uninitialized Lanczos table, arbitrary lens guessed, positions up to 0.3 px off, stale filter cache, database not thread safe, gray path, groups | 50 (`tests/run.sh`) |
+| gimp-lqr-plugin | rigidity and enlargement step ignored, masks by name never found, Repeat always 100x100, seam colour crash, no translation, 1 px crash in liblqr, new-image masks | 74 (`tests/run.sh`, `--asan`) |
+| gimp-plugin-bimp | crash on header-less .bimp, repeated manipulations, reads past arrays, use-after-free in curves, alpha added to every PNG/TIFF/WebP, GIF always failed, metadata dropped, errors counted as success | 70 plus unit tests (`tests/run.sh`, `BIMP_SANITIZE=1`) |
+| gegl-depth-blur | result depended on tiling and threads, highlights and depth in the wrong color space, rotation reversed, NaN spread | 114 (`tests/run.sh`) |
+| gegl-underwater | heap overflow on thin images, one NaN pixel spoiled all, marine snow depended on tiling, hang on unbounded input | 25 + 8 (`tests/check.sh`, `tests/gimp-check.sh`) |
+| gimp-plugin-devtools | flatpak info translated labels broke the version, `$*` quoting, wrong key codes | 179 (`tests/run.sh`) |
+
+Open decisions from the audit:
+
+- Tests on `gimp3-upstream` of the wavelet plug-ins (that branch had none).
+- Wavelet: YCbCr/CIELAB constants inherited from GIMP 2 (small drift in
+  the GEGL ops; CIELAB assumes sRGB); colour not premultiplied by alpha.
+- Lensfun filter keeps two full float copies and ignores the zoom level.
+- LQR: `batch/batch-gimp-lqr.scm` is GIMP 2 Script-Fu (port or drop);
+  licence headers missing in some UI files; report the liblqr 1 px
+  out-of-bounds read upstream.
+- BIMP: same file name from two input folders overwrites or is skipped;
+  skipped files count as processed (both upstream behaviour).
+- Depth Blur is slow in small render pieces (a cached region rounded to
+  the tile grid would help); report GEGL's `get_source_space` ignoring
+  its pad argument upstream.
+- Underwater: alpha is ignored in the estimates; backscatter 0 still
+  changes the photo; open water gets darker by default.
+
 ## Candidates for later
 
 [docs/candidates.md](docs/candidates.md) (2026-09-26): a fact-checked
